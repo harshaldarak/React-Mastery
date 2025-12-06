@@ -7,7 +7,7 @@ import { TodoContextProvider } from "./contexts";
 function App() {
   const [todos, setTodos] = useState([]);
   const addTodo = (todo) => {
-    setTodos((prev) => [...prev, { id: Date.now(), ...todo }]);
+    setTodos((prev) => [{ id: Date.now(), ...todo }, ...prev]);
   };
 
   const updateTodo = (id, todo) => {
@@ -38,6 +38,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
+
   return (
     <TodoContextProvider
       value={{ todos, addTodo, updateTodo, deleteTodo, toggleComplete }}
